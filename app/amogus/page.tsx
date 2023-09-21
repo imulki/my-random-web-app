@@ -16,7 +16,7 @@ const pattern = [
   [0,0,0,0,1,0,1,0],
 ]
 
-function listToMatrix(list, elementsPerSubArray: number) {
+function listToMatrix(list: Uint8ClampedArray, elementsPerSubArray: number) {
   var matrix = [], i, k, n;
 
   for (i=0; i<list.length/(elementsPerSubArray*4); i++) {
@@ -58,7 +58,9 @@ const amogussify = (rawImageMatrix: Uint8ClampedArray, imageWidth: number) => {
     i = (i + 1) % pattern.length
   })
 
-  return new Uint8ClampedArray(resultImage.flat(Infinity))
+  const flattened = resultImage.flat(3)
+
+  return new Uint8ClampedArray(flattened)
 }
 
 // def amogussifyRow(rawRow: Array, rowIdx: int):
@@ -72,7 +74,7 @@ const amogussifyRow = (rawRow: number[][], rowIdx: number) => {
 }
 
 // def amogussifyPixel(rawPixel: number, rowIdx: int, colIdx: int):
-const amogussifyPixel = (rawPixel: number[], rowIdx: number, colIdx: int) => {
+const amogussifyPixel = (rawPixel: number[], rowIdx: number, colIdx: number) => {
   if (pattern[rowIdx][colIdx] == 1){
     const r = rawPixel[0]
     const g = rawPixel[1]
@@ -96,7 +98,7 @@ export default function Amogus() {
   const hiddenInputRef = useRef(null)
   const hiddenCanvasRef = useRef(null)
 
-  const onSelectFile = async (e) => {
+  const onSelectFile = async (e: any) => {
     const reader = new FileReader()
     const blob = new Blob()
     const file = e.target.files[0]
@@ -104,7 +106,8 @@ export default function Amogus() {
     reader.addEventListener(
       'load',
       () => {
-        setImageUrl(reader.result)
+        const url: string = (reader.result as string)
+        setImageUrl(url)
       },
       false
     )
@@ -117,8 +120,8 @@ export default function Amogus() {
   }
 
   const onProcessFile = () => {
-    const resultCanvas: HTMLCanvasElement | null = hiddenCanvasRef.current
-    const ctx: CanvasRenderingContext2D = resultCanvas.getContext('2d')
+    const resultCanvas: HTMLCanvasElement = ((hiddenCanvasRef.current as unknown) as HTMLCanvasElement)
+    const ctx: CanvasRenderingContext2D = resultCanvas?.getContext('2d')!
     const img = new Image()
 
     img.src = imageUrl
@@ -178,7 +181,7 @@ export default function Amogus() {
             hidden
             onChange={(e) => onSelectFile(e)}
           />
-          <Button onClick={(e) => {hiddenInputRef.current.click()}}>
+          <Button onClick={(e) => {((hiddenInputRef.current as unknown) as HTMLInputElement).click()}}>
             Select File
           </Button>
           <Button onClick={(e) => {onProcessFile()}}>
