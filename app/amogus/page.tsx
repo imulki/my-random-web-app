@@ -147,26 +147,7 @@ export default function Amogus() {
     const resultImgData = new ImageData(amogussified, imageData.width, imageData.height, undefined)
     return resultImgData
   }
-
-  // const uploadButton = (
-  //   <>
-      
-  //     <Row gutter={5}>
-  //       <Col flex={1}>{loading ? <LoadingOutlined /> : <PlusOutlined />}</Col>
-  //       <Col flex={'auto'}>Upload</Col>
-  //     </Row>
-  //   </>
-  // );
-
-  // const resultCanvas = (
-  //   <>
-  //     <canvas
-  //     ref = {hiddenCanvasRef}
-  //     id='resultCanvas'
-  //     />
-  //   </>
-  // )
-
+  
   return (
     <div className='flex justify-center p-8'>
       <div>
