@@ -221,7 +221,7 @@ export default function Amogus() {
                 return row.map((_, colIdx) => {
                   return (
                     <Button 
-
+                      key={`${rowIdx} ${colIdx}`}
                       type={(pattern[rowIdx][colIdx] === 1) ? 'primary' : 'default'} 
                       onClick={() => onPatternButtonClick(rowIdx, colIdx)}
                       // type={(active) ? 'primary' : 'default'} 
