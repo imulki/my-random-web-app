@@ -140,7 +140,7 @@ export default function Amogus() {
   }
   
   return (
-    <div className='p-8'>
+    <div className='p-4'>
       <div>
         <Title level={1} className='text-center'>Amogussifier</Title>
         <Title level={4} className='text-center'>Makes your picture contain pattern of the iconic character (and others)</Title>
